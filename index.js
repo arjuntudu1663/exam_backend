@@ -217,7 +217,7 @@ app.post("/exam_create",async(req,res)=>{
             status:req.body.status,
             batchCode:req.body.batchCode
         })
-        (response)
+       
         res.json(response)
 
     }catch(e){}
