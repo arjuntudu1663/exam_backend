@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json());
 app.use(cors(
     {
-        origin : ["https://exam-frontend-vert.vercel.app"]
+        origin : ["https://exam-frontend-vert.vercel.app","http://localhost:3000"]
     }
 ));
 
@@ -218,7 +218,7 @@ app.post("/exam_create",async(req,res)=>{
             status:req.body.status,
             batchCode:req.body.batchCode
         })
-        (response)
+       
         res.json(response)
 
     }catch(e){}
