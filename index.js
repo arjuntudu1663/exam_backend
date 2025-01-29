@@ -216,7 +216,8 @@ app.post("/exam_create",async(req,res)=>{
             duration:req.body.duration,
             organizer:req.body.organizer,
             status:req.body.status,
-            batchCode:req.body.batchCode
+            batchCode:req.body.batchCode,
+            fullMarks:0
         })
        
         res.json(response)
