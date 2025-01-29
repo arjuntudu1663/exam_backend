@@ -14,7 +14,7 @@ try{
     mongoose.connect("mongodb+srv://arjuntudu9163:fv9FIKG1eb8UKcee@cluster0.cq6wv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 }catch(e){
     if(e){
-        console.log(e)
+        (e)
     }
 }
 
@@ -100,9 +100,10 @@ app.post("/organizer_login",async(req,res)=>{
 })
 
 app.get("/organizer_all",async(req,res)=>{
-     
+     ("hitttttt")
     try{
         const response = await Organizer.find({})
+        (response,"<==== org all")
         res.json(response)
     }catch(e){
 
@@ -113,7 +114,7 @@ app.get("/organizer_all",async(req,res)=>{
 
 app.post("/student_register",async(req,res)=>{
     
-    console.log(req.body)
+    (req.body)
 
     if(req.body.password === req.body.re_password){
         try{ 
@@ -172,7 +173,7 @@ app.post("/student_find",async(req,res)=>{
 })
 
 app.post("/student_update",async(req,res)=>{
-    console.log(req.body,"<=== update incoming")
+    console.log(req.body.id,"<=== update incoming")
      try{
        
               if(req.body.batch.length>0){
@@ -190,8 +191,11 @@ app.post("/student_update",async(req,res)=>{
                     $set:{ roll_no:req.body.roll_no}
                  })
               }
-
-              res.json({"value":true})
+            
+              const response = await Student.find({_id:req.body.id})
+              console.log(response,"<== update response")
+              res.json(response)
+            
      }catch(e){}
 })
 
@@ -200,7 +204,7 @@ app.post("/student_update",async(req,res)=>{
 
 app.post("/exam_create",async(req,res)=>{
      
-    console.log(req.body,"<===== incoming exam req")
+  
 
     try{
 
@@ -211,7 +215,7 @@ app.post("/exam_create",async(req,res)=>{
             status:req.body.status,
             batchCode:req.body.batchCode
         })
-        console.log(response)
+        (response)
         res.json(response)
 
     }catch(e){}
@@ -233,7 +237,7 @@ app.post("/exam_get",async(req,res)=>{
 
 app.post("/exam_my",async(req,res)=>{
     
-    console.log(req.body)
+    (req.body,"<=========== myExams")
     try{
 
         const response = await Exam.find({batchCode:req.body.batchCode,status:"on"});
@@ -247,8 +251,8 @@ app.post("/exam_my",async(req,res)=>{
 app.post("/exam_on",async(req,res)=>{
      
 
-    console.log(req.body,"<=======")
-    console.log(new Date().toLocaleTimeString(),"<=== current time")
+    (req.body,"<=======")
+    (new Date().toLocaleTimeString(),"<=== current time")
     
     try{
         const response = await Exam.findOneAndUpdate({_id:req.body.exam_id},
@@ -268,7 +272,7 @@ app.post("/exam_on",async(req,res)=>{
     
          );
         
-        console.log(response,"<=== update with time")
+        (response,"<=== update with time")
         const exam_find = await Exam.find({_id:req.body.exam_id})
         const duration = exam_find[0].duration
         setTimeout(async()=>{
@@ -283,7 +287,7 @@ app.post("/exam_on",async(req,res)=>{
 app.post("/exam_off",async(req,res)=>{
      
 
-    console.log(req.body,"<=======")
+    (req.body,"<=======")
  
     
     try{
@@ -336,13 +340,13 @@ app.post("/exam_org",async(req,res)=>{
 
 app.post("/exam_curr",async(req,res)=>{
 
-    console.log(req.body,"<================ curr exammmmmmmmmmmmmmmm")
+    (req.body,"<================ curr exammmmmmmmmmmmmmmm")
     const id = req.body.id;
 
 
     try{
         const response = await Exam.find({_id:id})
-        console.log(response)
+        (response)
         res.json(response)
     }catch(e){
 
@@ -352,7 +356,7 @@ app.post("/exam_curr",async(req,res)=>{
 //questions////////////////////////////////////////////////////////////////
 app.post("/add_question",async(req,res)=>{
     
-    console.log(req.body,"<=== incoming question")
+    (req.body,"<=== incoming question")
     try{
 
         const response = await Question.create({...req.body,
@@ -363,7 +367,8 @@ app.post("/add_question",async(req,res)=>{
             answer:"option"+req.body.answer
         })
 
-        console.log(response,"<=== question created")
+        (response,"<=== question created")
+        res.json(response)
 
     }catch(e){}
  
@@ -371,7 +376,7 @@ app.post("/add_question",async(req,res)=>{
 
 app.post("/allQuestions_exam",async(req,res)=>{
      
-    console.log(req.body,"<==== all questions")
+    (req.body,"<==== all questions")
 
     try{
        const response = await Question.find({exam_id:req.body.exam_id})
@@ -394,7 +399,7 @@ app.post("/allQuestions_exam",async(req,res)=>{
 //result///////////////////////////////////////////////////////////////////
 app.post("/result_add",async(req,res)=>{
      
-    console.log(req.body)
+    (req.body)
     const exam_id = req.body.exam_id 
     const currentMarks = req.body.currentMarks 
     const profile_id = req.body.student_id
@@ -456,6 +461,6 @@ app.get("/",(req,res)=>{
 
 app.listen("5000",(err)=>{
     if(!err){
-       console.log("app started")
+      console.log ("app started")
     }
 })
