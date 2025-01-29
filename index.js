@@ -100,7 +100,7 @@ app.post("/organizer_login",async(req,res)=>{
 })
 
 app.get("/organizer_all",async(req,res)=>{
-     ("hitttttt")
+    
     try{
         const response = await Organizer.find({})
         (response,"<==== org all")
@@ -114,7 +114,7 @@ app.get("/organizer_all",async(req,res)=>{
 
 app.post("/student_register",async(req,res)=>{
     
-    (req.body)
+ 
 
     if(req.body.password === req.body.re_password){
         try{ 
@@ -237,7 +237,7 @@ app.post("/exam_get",async(req,res)=>{
 
 app.post("/exam_my",async(req,res)=>{
     
-    (req.body,"<=========== myExams")
+    
     try{
 
         const response = await Exam.find({batchCode:req.body.batchCode,status:"on"});
@@ -251,8 +251,8 @@ app.post("/exam_my",async(req,res)=>{
 app.post("/exam_on",async(req,res)=>{
      
 
-    (req.body,"<=======")
-    (new Date().toLocaleTimeString(),"<=== current time")
+    
+   
     
     try{
         const response = await Exam.findOneAndUpdate({_id:req.body.exam_id},
@@ -272,7 +272,7 @@ app.post("/exam_on",async(req,res)=>{
     
          );
         
-        (response,"<=== update with time")
+       
         const exam_find = await Exam.find({_id:req.body.exam_id})
         const duration = exam_find[0].duration
         setTimeout(async()=>{
@@ -287,7 +287,7 @@ app.post("/exam_on",async(req,res)=>{
 app.post("/exam_off",async(req,res)=>{
      
 
-    (req.body,"<=======")
+
  
     
     try{
@@ -340,13 +340,13 @@ app.post("/exam_org",async(req,res)=>{
 
 app.post("/exam_curr",async(req,res)=>{
 
-    (req.body,"<================ curr exammmmmmmmmmmmmmmm")
+    
     const id = req.body.id;
 
 
     try{
         const response = await Exam.find({_id:id})
-        (response)
+       
         res.json(response)
     }catch(e){
 
@@ -356,7 +356,7 @@ app.post("/exam_curr",async(req,res)=>{
 //questions////////////////////////////////////////////////////////////////
 app.post("/add_question",async(req,res)=>{
     
-    (req.body,"<=== incoming question")
+   
     try{
 
         const response = await Question.create({...req.body,
@@ -367,7 +367,7 @@ app.post("/add_question",async(req,res)=>{
             answer:"option"+req.body.answer
         })
 
-        (response,"<=== question created")
+       
         res.json(response)
 
     }catch(e){}
@@ -376,7 +376,7 @@ app.post("/add_question",async(req,res)=>{
 
 app.post("/allQuestions_exam",async(req,res)=>{
      
-    (req.body,"<==== all questions")
+   
 
     try{
        const response = await Question.find({exam_id:req.body.exam_id})
@@ -399,7 +399,7 @@ app.post("/allQuestions_exam",async(req,res)=>{
 //result///////////////////////////////////////////////////////////////////
 app.post("/result_add",async(req,res)=>{
      
-    (req.body)
+ 
     const exam_id = req.body.exam_id 
     const currentMarks = req.body.currentMarks 
     const profile_id = req.body.student_id
