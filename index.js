@@ -36,6 +36,7 @@ const Exam = mongoose.model("exams",{
     status:String,
     startTime:String,
     batchCode:String,
+    fullMarks:Number,
     givers:[]
 })
 const Question = mongoose.model("questions",{
@@ -368,8 +369,11 @@ app.post("/add_question",async(req,res)=>{
             option4:req.body.option4,
             answer:"option"+req.body.answer
         })
-
-       
+       const response1 = await Exam.find({_id:req.body.exam_id});
+       const count = response1[0].fullMarks+1
+       const response2 = await Exam.findOneAndUpdate({_id:req.body.exam_id},{$set:{
+          fullMarks : count
+       }})
         res.json(response)
 
     }catch(e){}
@@ -394,6 +398,20 @@ app.post("/allQuestions_exam",async(req,res)=>{
        })
        res.json({"response":response,"answers":answers})
     }catch(e){}
+
+})
+
+app.post("/fullMarks",async(req,res)=>{
+    console.log(req.body)
+    try{
+
+        const response = await Exam.findOneAndUpdate({_id:req.body.exam_id},{$set:{
+            fullMarks:req.body.value
+        }})
+
+    }catch(e){
+      
+    }
 
 })
 
